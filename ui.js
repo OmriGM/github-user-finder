@@ -1,9 +1,9 @@
-class UI {
-    constructor() {
-        this.profile = document.getElementById('profile');
-    }
-    showProfile(user) {
-        this.profile.innerHTML = `
+export default class UI {
+  constructor() {
+    this.profile = document.getElementById('profile');
+  }
+  showProfile(user) {
+    this.profile.innerHTML = `
             <div class="card card-body mb-3">
                 <div class="row">
                     <div class="col-md-3">
@@ -29,13 +29,13 @@ class UI {
             <div id="repos"></div>
             </div>
         `;
-    }
+  }
 
-    showRepos(repos) {
-        let output = '';
+  showRepos(repos) {
+    let output = '';
 
-        repos.forEach(function(repo) {
-            output += `
+    repos.forEach(function (repo) {
+      output += `
             <div class="card card-body mb-2">
                 <div class="row">
                     <div class="col-sm-6">
@@ -50,33 +50,33 @@ class UI {
                 </div>
             </div>            
             `;
-        });
+    });
 
-        document.getElementById('repos').innerHTML = output;
+    document.getElementById('repos').innerHTML = output;
+  }
+
+  showAlert(message, className) {
+    this.clearAlert();
+    const div = document.createElement('div');
+    div.className = className;
+    div.appendChild(document.createTextNode(message));
+    const container = document.querySelector('.searchContainer');
+    const search = document.querySelector('.search');
+    container.insertBefore(div, search);
+
+    setTimeout(() => {
+      this.clearAlert();
+    }, 2000);
+  }
+
+  clearAlert() {
+    const currentAlert = document.querySelector('.alert');
+    if (currentAlert) {
+      currentAlert.remove();
     }
+  }
 
-    showAlert(message, className) {
-        this.clearAlert();
-        const div = document.createElement('div');
-        div.className = className;
-        div.appendChild(document.createTextNode(message));
-        const container = document.querySelector('.searchContainer');
-        const search  =  document.querySelector('.search');
-        container.insertBefore(div, search);
-
-        setTimeout(() => {
-            this.clearAlert();
-        }, 2000);
-    }
-
-    clearAlert() {
-        const currentAlert = document.querySelector('.alert');
-        if(currentAlert) {
-            currentAlert.remove();
-        }
-    }
-
-    clearProfile() {
-        this.profile.innerHTML = '';
-    }
+  clearProfile() {
+    this.profile.innerHTML = '';
+  }
 }
